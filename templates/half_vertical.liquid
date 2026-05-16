@@ -1,0 +1,90 @@
+{% assign date_range = trmnl.plugin_settings.custom_fields_values.date_range %}
+{% assign metrics = trmnl.plugin_settings.custom_fields_values.metrics %}
+{% assign site_id = trmnl.plugin_settings.custom_fields_values.site_id %}
+
+{% assign visits_summary = data[0] %}
+{% assign actions = data[1] %}
+{% assign top_pages = data[2] %}
+{% assign top_referrers = data[3] %}
+{% assign top_countries = data[4] %}
+
+{% case date_range %}
+  {% when 'period%3Dday%26date%3Dtoday' %}{% assign date_label = 'Today' %}
+  {% when 'period%3Dday%26date%3Dyesterday' %}{% assign date_label = 'Yesterday' %}
+  {% when 'period%3Drange%26date%3Dprevious7' %}{% assign date_label = 'Last 7 days' %}
+  {% when 'period%3Drange%26date%3Dprevious30' %}{% assign date_label = 'Last 30 days' %}
+  {% else %}{% assign date_label = date_range %}
+{% endcase %}
+
+<div class="layout layout--col">
+
+  {% if metrics contains 'visits' %}
+  <div class="markdown">
+    <span class="label">Visits</span>
+    <span class="value value--large">{{ visits_summary.nb_visits }}</span>
+    <span class="label label--small">{% if visits_summary.nb_uniq_visitors %}{{ visits_summary.nb_uniq_visitors }} unique · {% endif %}{{ visits_summary.bounce_rate }} bounce</span>
+  </div>
+  {% endif %}
+
+  {% if metrics contains 'pageviews' %}
+  <div class="markdown">
+    <span class="label">Pageviews</span>
+    <span class="value value--large">{{ actions.nb_pageviews }}</span>
+    <span class="label label--small">{{ actions.nb_uniq_pageviews }} unique</span>
+  </div>
+  {% endif %}
+
+  {% if metrics contains 'top_pages' %}
+  <div>
+    <span class="label label--underline">Top pages</span>
+    <table class="table">
+      <tbody>
+        {% for row in top_pages limit:3 %}
+        <tr>
+          <td><span class="title title--small">{{ row.label | truncate: 20 }}</span></td>
+          <td class="text--right"><span class="value value--small">{{ row.nb_hits }}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+  {% if metrics contains 'top_referrers' %}
+  <div>
+    <span class="label label--underline">Top referrers</span>
+    <table class="table">
+      <tbody>
+        {% for row in top_referrers limit:3 %}
+        <tr>
+          <td><span class="title title--small">{{ row.label | truncate: 20 }}</span></td>
+          <td class="text--right"><span class="value value--small">{{ row.nb_visits }}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+  {% if metrics contains 'top_countries' %}
+  <div>
+    <span class="label label--underline">Top countries</span>
+    <table class="table">
+      <tbody>
+        {% for row in top_countries limit:3 %}
+        <tr>
+          <td><span class="title title--small">{{ row.label | truncate: 20 }}</span></td>
+          <td class="text--right"><span class="value value--small">{{ row.nb_visits }}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+</div>
+
+<div class="title_bar">
+  <span class="title">Matomo</span>
+  <span class="instance">{{ date_label }}</span>
+</div>

@@ -1,0 +1,48 @@
+{% comment %} Quadrant is tiny — show only the first selected metric's headline number. {% endcomment %}
+{% assign date_range = trmnl.plugin_settings.custom_fields_values.date_range %}
+{% assign metrics = trmnl.plugin_settings.custom_fields_values.metrics %}
+{% assign site_id = trmnl.plugin_settings.custom_fields_values.site_id %}
+
+{% assign visits_summary = data[0] %}
+{% assign actions = data[1] %}
+{% assign top_pages = data[2] %}
+{% assign top_referrers = data[3] %}
+{% assign top_countries = data[4] %}
+
+{% case date_range %}
+  {% when 'period%3Dday%26date%3Dtoday' %}{% assign date_label = 'Today' %}
+  {% when 'period%3Dday%26date%3Dyesterday' %}{% assign date_label = 'Yesterday' %}
+  {% when 'period%3Drange%26date%3Dprevious7' %}{% assign date_label = 'Last 7 days' %}
+  {% when 'period%3Drange%26date%3Dprevious30' %}{% assign date_label = 'Last 30 days' %}
+  {% else %}{% assign date_label = date_range %}
+{% endcase %}
+
+<div class="layout layout--center">
+
+  {% if metrics contains 'visits' %}
+    <span class="label">Visits · {{ date_label }}</span>
+    <span class="value value--xlarge">{{ visits_summary.nb_visits }}</span>
+    <span class="label label--small">{{ visits_summary.nb_uniq_visitors }} unique</span>
+  {% elsif metrics contains 'pageviews' %}
+    <span class="label">Pageviews · {{ date_label }}</span>
+    <span class="value value--xlarge">{{ actions.nb_pageviews }}</span>
+    <span class="label label--small">{{ actions.nb_uniq_pageviews }} unique</span>
+  {% elsif metrics contains 'top_pages' %}
+    <span class="label">Top page · {{ date_label }}</span>
+    <span class="title">{{ top_pages[0].label | truncate: 24 }}</span>
+    <span class="value value--xlarge">{{ top_pages[0].nb_hits }}</span>
+  {% elsif metrics contains 'top_referrers' %}
+    <span class="label">Top referrer · {{ date_label }}</span>
+    <span class="title">{{ top_referrers[0].label | truncate: 24 }}</span>
+    <span class="value value--xlarge">{{ top_referrers[0].nb_visits }}</span>
+  {% elsif metrics contains 'top_countries' %}
+    <span class="label">Top country · {{ date_label }}</span>
+    <span class="title">{{ top_countries[0].label | truncate: 24 }}</span>
+    <span class="value value--xlarge">{{ top_countries[0].nb_visits }}</span>
+  {% endif %}
+
+</div>
+
+<div class="title_bar">
+  <span class="title">Matomo</span>
+</div>

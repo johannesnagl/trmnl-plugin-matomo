@@ -1,0 +1,47 @@
+- keyname: matomo_url
+  field_type: url
+  name: Matomo URL
+  description: Base URL of your Matomo installation
+  placeholder: https://analytics.example.com
+  help_text: No trailing slash, no /index.php.
+
+- keyname: token_auth
+  field_type: password
+  name: Auth token
+  description: Matomo auth token with view access on this site
+  help_text: Matomo - top-right user menu - Security - Auth tokens - Create new token. A view-only token is enough.
+
+- keyname: site_id
+  field_type: string
+  name: Site ID
+  description: Numeric ID of the Matomo site to report on
+  default: '1'
+  help_text: Find it under Administration - Websites - Manage.
+
+- keyname: date_range
+  field_type: select
+  name: Time range
+  description: Period of data to display
+  options:
+  - Today (partial): period%3Dday%26date%3Dtoday
+  - Yesterday: period%3Dday%26date%3Dyesterday
+  - Last 7 days: period%3Drange%26date%3Dprevious7
+  - Last 30 days: period%3Drange%26date%3Dprevious30
+  default: period%3Dday%26date%3Dyesterday
+  help_text: Last 7 and 30 day ranges exclude today. Unique visitors only show on day periods unless Matomo config enables it for ranges.
+
+- keyname: metrics
+  field_type: select
+  multiple: true
+  name: Metrics to show
+  description: Pick 2-3 metrics to render on the device
+  options:
+  - Visits and unique visitors: visits
+  - Pageviews: pageviews
+  - Top pages: top_pages
+  - Top referrers: top_referrers
+  - Top countries: top_countries
+  default:
+  - visits
+  - pageviews
+  help_text: More than 3 may not all fit on smaller layouts.

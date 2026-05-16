@@ -1,0 +1,47 @@
+[
+  {
+    "nb_visits": 13083,
+    "nb_uniq_visitors": 10290,
+    "nb_users": 2,
+    "nb_actions": 31389,
+    "nb_visits_converted": 976,
+    "bounce_count": 8580,
+    "sum_visit_length": 2553481,
+    "max_actions": 67,
+    "bounce_rate": "66%",
+    "nb_actions_per_visit": 2.4,
+    "avg_time_on_site": 195
+  },
+  {
+    "nb_pageviews": 26019,
+    "nb_uniq_pageviews": 21606,
+    "nb_downloads": 33,
+    "nb_uniq_downloads": 31,
+    "nb_outlinks": 1704,
+    "nb_uniq_outlinks": 1616,
+    "nb_searches": 228,
+    "nb_keywords": 56,
+    "hits": 31853
+  },
+  [
+    { "label": "diving",     "nb_hits": 5063, "nb_visits": 4487 },
+    { "label": "products",   "nb_hits": 2806, "nb_visits": 2049 },
+    { "label": "jobs",       "nb_hits": 1370, "nb_visits": 1228 },
+    { "label": "my-account", "nb_hits": 1455, "nb_visits": 1064 },
+    { "label": "divesite",   "nb_hits": 1087, "nb_visits": 1010 }
+  ],
+  [
+    { "label": "reddit",              "nb_visits": 625 },
+    { "label": "diveadvisor.com",     "nb_visits": 338 },
+    { "label": "www.scubadiving.com", "nb_visits": 267 },
+    { "label": "scubadiverlife.com",  "nb_visits": 248 },
+    { "label": "NotebookLM",          "nb_visits": 200 }
+  ],
+  [
+    { "label": "United States",  "code": "us", "nb_visits": 1840 },
+    { "label": "Germany",        "code": "de", "nb_visits": 801 },
+    { "label": "Australia",      "code": "au", "nb_visits": 733 },
+    { "label": "United Kingdom", "code": "gb", "nb_visits": 730 },
+    { "label": "Indonesia",      "code": "id", "nb_visits": 497 }
+  ]
+]
