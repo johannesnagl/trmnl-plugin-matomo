@@ -4,7 +4,11 @@ A [TRMNL](https://usetrmnl.com) plugin that shows [Matomo Analytics](https://mat
 
 Configure your Matomo URL, auth token, and site ID — then pick 2–3 metrics to show. Zero backend required: TRMNL polls Matomo's Reporting API directly and renders the four screen layouts via Liquid templates.
 
-> 📺 *Add a screenshot here once you've published to the marketplace.*
+![Matomo plugin preview on TRMNL](plugin-f63fcf.png)
+
+> **Unofficial plugin** — not affiliated with, endorsed by, or connected to Matomo or InnoCraft. The Matomo name and logo belong to InnoCraft.
+>
+> **No data is stored or transmitted to third parties.** TRMNL polls your Matomo instance directly with the credentials you provide. Nothing is sent anywhere else.
 
 ## What it shows
 

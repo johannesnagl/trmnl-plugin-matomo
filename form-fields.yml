@@ -55,3 +55,12 @@
   - "1.234.567 (European)": '.'
   - "1234567 (no separator)": ''
   default: ','
+
+- keyname: about
+  field_type: author_bio
+  name: About this plugin
+  category: analytics,kpi
+  description: Matomo Analytics on your TRMNL e-ink display. Pick 2–3 metrics (visits, pageviews, top pages, referrers, countries) and they refresh on the device. Unofficial plugin — not affiliated with Matomo or InnoCraft. No data stored; TRMNL polls your Matomo instance directly with credentials you provide.
+  github_url: https://github.com/johannesnagl/trmnl-plugin-matomo
+  learn_more_url: https://yetanother.one
+  email_address: hi@yetanother.one

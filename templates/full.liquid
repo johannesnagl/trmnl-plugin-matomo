@@ -46,16 +46,16 @@
     {% if metrics contains 'visits' %}
     <div class="column">
       <div class="title">Visits</div>
-      <div class="value {{ kpi_size }}">{{ visits_summary.nb_visits | number_with_delimiter: number_delim }}</div>
-      <div class="label">{% if visits_summary.nb_uniq_visitors %}{{ visits_summary.nb_uniq_visitors | number_with_delimiter: number_delim }} unique · {% endif %}{{ visits_summary.bounce_rate }} bounce</div>
+      <div class="value {{ kpi_size }}" data-value-fit="true">{{ visits_summary.nb_visits | number_with_delimiter: number_delim }}</div>
+      <div class="label text--gray-45">{% if visits_summary.nb_uniq_visitors %}{{ visits_summary.nb_uniq_visitors | number_with_delimiter: number_delim }} unique · {% endif %}{{ visits_summary.bounce_rate }} bounce</div>
     </div>
     {% endif %}
 
     {% if metrics contains 'pageviews' %}
     <div class="column">
       <div class="title">Pageviews</div>
-      <div class="value {{ kpi_size }}">{{ actions.nb_pageviews | number_with_delimiter: number_delim }}</div>
-      <div class="label">{{ actions.nb_uniq_pageviews | number_with_delimiter: number_delim }} unique pageviews</div>
+      <div class="value {{ kpi_size }}" data-value-fit="true">{{ actions.nb_pageviews | number_with_delimiter: number_delim }}</div>
+      <div class="label text--gray-45">{{ actions.nb_uniq_pageviews | number_with_delimiter: number_delim }} unique pageviews</div>
     </div>
     {% endif %}
 
@@ -67,12 +67,12 @@
     {% if metrics contains 'top_pages' %}
     <div class="column">
       <div class="title label--underline">Top pages</div>
-      <table class="table">
+      <table class="table table--base" style="width: 100%">
         <tbody>
           {% for row in top_pages limit:5 %}
           <tr>
-            <td><span class="value value--small">{{ row.label | truncate: 24 }}</span></td>
-            <td class="text--right"><span class="value value--small">{{ row.nb_hits | number_with_delimiter: number_delim }}</span></td>
+            <td style="width: 70%"><span class="value value--xsmall" data-value-fit="true">{{ '/' | append: row.label | replace: '//', '/' | truncate: 24 }}</span></td>
+            <td class="text--right" style="width: 30%"><span class="value value--xsmall" data-value-fit="true">{{ row.nb_hits | number_with_delimiter: number_delim }}</span></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -83,12 +83,12 @@
     {% if metrics contains 'top_referrers' %}
     <div class="column">
       <div class="title label--underline">Top referrers</div>
-      <table class="table">
+      <table class="table table--base" style="width: 100%">
         <tbody>
           {% for row in top_referrers limit:5 %}
           <tr>
-            <td><span class="value value--small">{{ row.label | truncate: 24 }}</span></td>
-            <td class="text--right"><span class="value value--small">{{ row.nb_visits | number_with_delimiter: number_delim }}</span></td>
+            <td style="width: 70%"><span class="value value--xsmall" data-value-fit="true">{{ row.label | truncate: 24 }}</span></td>
+            <td class="text--right" style="width: 30%"><span class="value value--xsmall" data-value-fit="true">{{ row.nb_visits | number_with_delimiter: number_delim }}</span></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -99,12 +99,12 @@
     {% if metrics contains 'top_countries' %}
     <div class="column">
       <div class="title label--underline">Top countries</div>
-      <table class="table">
+      <table class="table table--base" style="width: 100%">
         <tbody>
           {% for row in top_countries limit:5 %}
           <tr>
-            <td><span class="value value--small">{{ row.label | truncate: 24 }}</span></td>
-            <td class="text--right"><span class="value value--small">{{ row.nb_visits | number_with_delimiter: number_delim }}</span></td>
+            <td style="width: 70%"><span class="value value--xsmall" data-value-fit="true">{{ row.label | truncate: 24 }}</span></td>
+            <td class="text--right" style="width: 30%"><span class="value value--xsmall" data-value-fit="true">{{ row.nb_visits | number_with_delimiter: number_delim }}</span></td>
           </tr>
           {% endfor %}
         </tbody>
