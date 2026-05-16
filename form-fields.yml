@@ -45,3 +45,13 @@
   - visits
   - pageviews
   help_text: More than 3 may not all fit on smaller layouts.
+
+- keyname: number_format
+  field_type: select
+  name: Number format
+  description: Thousand separator for displayed numbers
+  options:
+  - "1,234,567 (English)": ','
+  - "1.234.567 (European)": '.'
+  - "1234567 (no separator)": ''
+  default: ','

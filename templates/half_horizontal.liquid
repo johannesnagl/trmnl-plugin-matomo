@@ -1,12 +1,14 @@
 {% assign date_range = trmnl.plugin_settings.custom_fields_values.date_range %}
 {% assign metrics = trmnl.plugin_settings.custom_fields_values.metrics %}
 {% assign site_id = trmnl.plugin_settings.custom_fields_values.site_id %}
+{% assign number_delim = trmnl.plugin_settings.custom_fields_values.number_format | default: ',' %}
 
 {% assign visits_summary = data[0] %}
 {% assign actions = data[1] %}
 {% assign top_pages = data[2] %}
 {% assign top_referrers = data[3] %}
 {% assign top_countries = data[4] %}
+{% assign site_info = data[5] %}
 
 {% case date_range %}
   {% when 'period%3Dday%26date%3Dtoday' %}{% assign date_label = 'Today' %}
@@ -16,46 +18,56 @@
   {% else %}{% assign date_label = date_range %}
 {% endcase %}
 
+{% if site_info.main_url %}
+  {% assign url_no_proto = site_info.main_url | split: '://' | last %}
+  {% assign host_only = url_no_proto | split: '/' | first %}
+  {% assign site_label = host_only | replace: 'www.', '' %}
+{% elsif site_info.name %}
+  {% assign site_label = site_info.name %}
+{% else %}
+  {% assign site_label = 'site ' | append: site_id %}
+{% endif %}
+
 <div class="layout">
   <div class="columns">
 
     {% if metrics contains 'visits' %}
     <div class="column">
-      <span class="label">Visits</span>
-      <span class="value value--large">{{ visits_summary.nb_visits }}</span>
-      <span class="label label--small">{{ visits_summary.nb_uniq_visitors }} unique</span>
+      <div class="title">Visits</div>
+      <div class="value value--large">{{ visits_summary.nb_visits | number_with_delimiter: number_delim }}</div>
+      <div class="label">{% if visits_summary.nb_uniq_visitors %}{{ visits_summary.nb_uniq_visitors | number_with_delimiter: number_delim }} unique{% else %}{{ visits_summary.bounce_rate }} bounce{% endif %}</div>
     </div>
     {% endif %}
 
     {% if metrics contains 'pageviews' %}
     <div class="column">
-      <span class="label">Pageviews</span>
-      <span class="value value--large">{{ actions.nb_pageviews }}</span>
-      <span class="label label--small">{{ actions.nb_uniq_pageviews }} unique</span>
+      <div class="title">Pageviews</div>
+      <div class="value value--large">{{ actions.nb_pageviews | number_with_delimiter: number_delim }}</div>
+      <div class="label">{{ actions.nb_uniq_pageviews | number_with_delimiter: number_delim }} unique</div>
     </div>
     {% endif %}
 
     {% if metrics contains 'top_pages' %}
     <div class="column">
-      <span class="label">Top page</span>
-      <span class="title title--small">{{ top_pages[0].label | truncate: 22 }}</span>
-      <span class="value value--medium">{{ top_pages[0].nb_hits }}</span>
+      <div class="title">Top page</div>
+      <div class="value value--small">{{ top_pages[0].label | truncate: 22 }}</div>
+      <div class="value value--medium">{{ top_pages[0].nb_hits | number_with_delimiter: number_delim }}</div>
     </div>
     {% endif %}
 
     {% if metrics contains 'top_referrers' %}
     <div class="column">
-      <span class="label">Top referrer</span>
-      <span class="title title--small">{{ top_referrers[0].label | truncate: 22 }}</span>
-      <span class="value value--medium">{{ top_referrers[0].nb_visits }}</span>
+      <div class="title">Top referrer</div>
+      <div class="value value--small">{{ top_referrers[0].label | truncate: 22 }}</div>
+      <div class="value value--medium">{{ top_referrers[0].nb_visits | number_with_delimiter: number_delim }}</div>
     </div>
     {% endif %}
 
     {% if metrics contains 'top_countries' %}
     <div class="column">
-      <span class="label">Top country</span>
-      <span class="title title--small">{{ top_countries[0].label | truncate: 22 }}</span>
-      <span class="value value--medium">{{ top_countries[0].nb_visits }}</span>
+      <div class="title">Top country</div>
+      <div class="value value--small">{{ top_countries[0].label | truncate: 22 }}</div>
+      <div class="value value--medium">{{ top_countries[0].nb_visits | number_with_delimiter: number_delim }}</div>
     </div>
     {% endif %}
 
@@ -64,5 +76,5 @@
 
 <div class="title_bar">
   <span class="title">Matomo</span>
-  <span class="instance">{{ date_label }}</span>
+  <span class="instance">{{ date_label }} · {{ site_label }}</span>
 </div>

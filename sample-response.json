@@ -43,5 +43,12 @@
     { "label": "Australia",      "code": "au", "nb_visits": 733 },
     { "label": "United Kingdom", "code": "gb", "nb_visits": 730 },
     { "label": "Indonesia",      "code": "id", "nb_visits": 497 }
-  ]
+  ],
+  {
+    "idsite": 1,
+    "name": "Demo Site",
+    "main_url": "https://divezone.net",
+    "timezone": "Europe/Paris",
+    "currency": "USD"
+  }
 ]
