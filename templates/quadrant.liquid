@@ -3,6 +3,7 @@
 {% assign metrics = trmnl.plugin_settings.custom_fields_values.metrics %}
 {% assign site_id = trmnl.plugin_settings.custom_fields_values.site_id %}
 {% assign number_delim = trmnl.plugin_settings.custom_fields_values.number_format | default: ',' %}
+{% if number_delim == 'null' %}{% assign number_delim = '' %}{% endif %}
 
 {% assign visits_summary = data[0] %}
 {% assign actions = data[1] %}
@@ -32,25 +33,25 @@
 <div class="layout layout--col layout--center">
 
   {% if metrics contains 'visits' %}
-    <div class="title">Visits</div>
-    <div class="value value--large" data-value-fit="true">{{ visits_summary.nb_visits | number_with_delimiter: number_delim }}</div>
-    <div class="label text--gray-45">{{ visits_summary.nb_uniq_visitors | number_with_delimiter: number_delim }} unique</div>
+    <div class="title lg:title--xlarge">Visits</div>
+    <div class="value value--large lg:value--xxlarge" data-value-fit="true">{{ visits_summary.nb_visits | number_with_delimiter: number_delim }}</div>
+    <div class="label lg:label--large text--gray-45">{{ visits_summary.nb_uniq_visitors | number_with_delimiter: number_delim }} unique</div>
   {% elsif metrics contains 'pageviews' %}
-    <div class="title">Pageviews</div>
-    <div class="value value--large" data-value-fit="true">{{ actions.nb_pageviews | number_with_delimiter: number_delim }}</div>
-    <div class="label text--gray-45">{{ actions.nb_uniq_pageviews | number_with_delimiter: number_delim }} unique</div>
+    <div class="title lg:title--xlarge">Pageviews</div>
+    <div class="value value--large lg:value--xxlarge" data-value-fit="true">{{ actions.nb_pageviews | number_with_delimiter: number_delim }}</div>
+    <div class="label lg:label--large text--gray-45">{{ actions.nb_uniq_pageviews | number_with_delimiter: number_delim }} unique</div>
   {% elsif metrics contains 'top_pages' %}
-    <div class="title">Top page</div>
-    <div class="label">{{ '/' | append: top_pages[0].label | replace: '//', '/' | truncate: 24 }}</div>
-    <div class="value value--large" data-value-fit="true">{{ top_pages[0].nb_hits | number_with_delimiter: number_delim }}</div>
+    <div class="title lg:title--xlarge">Top page</div>
+    <div class="label lg:label--large">{{ '/' | append: top_pages[0].label | replace: '//', '/' | truncate: 24 }}</div>
+    <div class="value value--large lg:value--xxlarge" data-value-fit="true">{{ top_pages[0].nb_hits | number_with_delimiter: number_delim }}</div>
   {% elsif metrics contains 'top_referrers' %}
-    <div class="title">Top referrer</div>
-    <div class="label">{{ top_referrers[0].label | truncate: 24 }}</div>
-    <div class="value value--large" data-value-fit="true">{{ top_referrers[0].nb_visits | number_with_delimiter: number_delim }}</div>
+    <div class="title lg:title--xlarge">Top referrer</div>
+    <div class="label lg:label--large">{{ top_referrers[0].label | truncate: 24 }}</div>
+    <div class="value value--large lg:value--xxlarge" data-value-fit="true">{{ top_referrers[0].nb_visits | number_with_delimiter: number_delim }}</div>
   {% elsif metrics contains 'top_countries' %}
-    <div class="title">Top country</div>
-    <div class="label">{{ top_countries[0].label | truncate: 24 }}</div>
-    <div class="value value--large" data-value-fit="true">{{ top_countries[0].nb_visits | number_with_delimiter: number_delim }}</div>
+    <div class="title lg:title--xlarge">Top country</div>
+    <div class="label lg:label--large">{{ top_countries[0].label | truncate: 24 }}</div>
+    <div class="value value--large lg:value--xxlarge" data-value-fit="true">{{ top_countries[0].nb_visits | number_with_delimiter: number_delim }}</div>
   {% endif %}
 
 </div>

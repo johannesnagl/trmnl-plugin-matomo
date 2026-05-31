@@ -53,7 +53,7 @@
   options:
   - "1,234,567 (English)": ','
   - "1.234.567 (European)": '.'
-  - "1234567 (no separator)": ''
+  - "1234567 (no separator)": 'null'
   default: ','
 
 - keyname: about
